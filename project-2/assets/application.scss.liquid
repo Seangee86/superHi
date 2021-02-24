@@ -1,0 +1,387 @@
+// Put your styles in this file.
+// Shopify will compile SCSS/SASS on each deploy.
+// Note: "@import" rules aren’t supported.
+
+$headline-font: 'Georgia', 'Times New Roman', Times, serif;
+$text-font: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+$black: #000000;
+$white: #ffffff;
+
+$light-black: #333333;
+
+$text-color: #555555;
+$text-color-white: #cccccc;
+$text-color-light: #707070;
+$text-color-light-white: #aaaaaa;
+
+$gold: #bea482;
+
+$background-color: #f7f2ea;
+$header-background-color: #eee6dd;
+$footer-back-ground-color: #f4ede6;
+$border-color: rgba(0,0,0,0.15);
+$border-color-white: rgba(255,255,255,0.15);
+
+$standard-border: 1px solid $border-color;
+$standard-border-white: 1px solid $border-color-white;
+
+$line-global: 20px;
+$gutter-global: $line-global;
+$offset-global: $line-global*2; // 40px
+
+$header-height: $line-global*4; // 80px
+
+$type-headline-lg: 50px;
+$type-headline-med: 30px;
+$type-body-med: 15px;
+$type-body-sm: 13px;
+
+$type-bold: 700;
+$type-book: 400;
+
+// Mixins
+
+@mixin flex-space-between {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin spaced-caps {
+    font-size: $type-body-sm;
+    font-weight: $type-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
+}
+
+// Base 
+
+* {
+    font-family: $text-font;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: $black;
+    line-height: $line-global;
+}
+
+body {
+    font-size: $type-body-med;
+    background-color: $background-color;
+    background-image: url('{{ "background.jpg | asset_url" }}');
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    padding-top: $header-height + $offset-global;
+}
+
+h1,h2,h3,h4,h5,h6,p,ul,ol {
+    margin: 0;
+    padding: 0;
+    font-weight: $type-book;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style-type: none;
+}
+
+// Style Guide
+h1,
+.h1,
+h2,  
+.h2 {
+    font-family: $headline-font;
+    font-weight: $type-bold;
+    color: $light-black;
+}
+
+h1,
+.h1 {
+    font-size: $type-headline-lg;
+    line-height: $line-global*3;
+}
+
+h2,
+.h2 {
+    font-size: $type-headline-med;
+    line-height: $line-global*2;
+}
+
+h4,
+.h4 {
+    @include spaced-caps;
+    color: $light-black;
+}
+
+a {
+    color: $text-color;
+    &:hover {
+        opacity: 0.75;
+    }
+}
+
+p {
+    color: $text-color;
+    a {
+        border-bottom: $standard-border;
+        &:hover {
+            border-bottom-color: $black;
+        }
+    }
+}
+
+.text-link {
+    @include spaced-caps;
+    color: $black;
+}
+
+// Utility Classess
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.wrapper {
+    padding-left: $offset-global;
+    padding-right: $offset-global;
+}
+
+.grid {
+    display: grid;
+    grid-column-gap: $gutter-global;
+    grid-row-gap: $gutter-global;
+
+    > * {
+        min-width: 0;
+        min-height: 0;
+    }
+
+    &.collaps {
+        grid-column-gap: 0;
+        grid-row-gap: 0;
+    }
+}
+
+.two-columns {
+    grid-template-columns: 1fr 1fr;
+}
+
+.valign-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.text-white {
+    color: $white;
+
+    h1,.h1,h2,.h2,h3,.h3,h4,.h4 {
+        color: $white;
+    }
+    p,
+    .accent-color {
+        color: $text-color-white;
+    }
+    a {
+        color: $white;
+    }
+}
+
+// Header 
+
+.header-global {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $header-height;
+    background-color: $header-background-color;
+    padding: $line-global $offset-global;
+    @include flex-space-between;
+
+    .shop-link {
+        order: -1;
+    }
+    .cart-close-text {
+        display: none;
+    }    
+}
+
+// Footer 
+
+.footer-global {
+    background-color: $footer-back-ground-color;
+    margin-top: $offset-global;
+    border-top: $standard-border;
+
+    h4 {
+        margin-bottom: $line-global;
+    }
+}
+
+
+
+.footer-top, 
+.footer-bottom {
+    padding: $offset-global;
+}
+
+.footer-top {
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.footer-bottom {
+    border-top: $standard-border;
+    @include flex-space-between;
+}
+
+.social-links {
+    a {
+        display: inline-block;
+        &:not(:last-child) {
+            margin-right: $line-global/2;
+        }
+    }
+}
+
+// Index page 
+.index-top {
+    height: 50vh;
+    min-height: 400px;
+    padding-bottom: $offset-global;
+}
+
+// Shared Product Styles
+.product-info-section {
+    @extend.text-white;
+    background-color: $light-black;
+    padding: $offset-global;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .product-title {
+        padding: $line-global;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .price {
+        display: inline-block;
+        font-size: $line-global;
+        color: $text-color-white;
+        font-weight: $type-book;
+        vertical-align: super;
+    }
+
+    .below-title {
+        max-width: 396px;
+        margin: 0 auto; 
+    }
+
+    p {
+        margin-bottom: $line-global;
+    }
+}
+
+// Product Card 
+
+.product-card {
+
+    .card-image {
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    &:nth-child(odd) {
+        .card-image {
+            grid-column: 0;
+            grid-row: 1;
+        }
+    }
+}
+
+// Product Card 
+
+.product-image {
+    width: 100%;
+
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+// Add to Cart Form 
+#add-to-cart-form {
+
+}
+
+.option-row {
+    text-align: left;
+    padding: $line-global 0;
+    border-top: $standard-border-white;
+    @include flex-space-between;
+
+    &:last-of-type {
+        border-bottom: $standard-border-white;
+    }
+}
+
+
+.option-title {
+    color: $text-color-white;
+}
+
+.variant-radio {
+    @extend .visually-hidden;
+
+    & + label {
+        @include spaced-caps;
+        display: inline-block;
+        cursor: pointer;
+        padding: $line-global;
+        border: 1px solid transparent;
+        color: $text-color-light-white;
+    }
+
+    &:checked + label {
+        color: $white;
+        border: 1px solid $white;
+    }
+
+    &:disabled + label {
+        cursor: not-allowed;
+        text-decoration: line-through;
+        color: $text-color;
+    }
+}
