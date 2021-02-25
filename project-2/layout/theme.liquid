@@ -23,5 +23,9 @@
     {% include 'footer' %}
   </main>
 
+  {% if templet != 'cart' %}
+    {% include 'mini-cart' %}
+  {% endif %}  
+
 </body>
 </html>

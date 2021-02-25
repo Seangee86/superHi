@@ -5,10 +5,11 @@
   <div class="product-info product-info-section">
     <h2 class="product-title">
       {{ product.title }}
-      <span class="price">{{ product.price | | money_without_trailing_zeros }}</span>
+      <span class="price">{{ product.price | money_without_trailing_zeros }}</span>
     </h2>
+
     <div class="below-title">
-      <div>{{ product.description }}</div>
+      <div class="product-description">{{ product.description }}</div>
 
       {% include 'add-to-cart-form' %}
     </div>

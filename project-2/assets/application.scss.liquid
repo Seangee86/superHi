@@ -41,6 +41,23 @@ $type-bold: 700;
 $type-book: 400;
 
 // Mixins
+@mixin reset-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    text-align: left;
+  }
 
 @mixin flex-space-between {
     display: flex;
@@ -100,7 +117,9 @@ ol {
 h1,
 .h1,
 h2,  
-.h2 {
+.h2,
+h3,
+.h3 {
     font-family: $headline-font;
     font-weight: $type-bold;
     color: $light-black;
@@ -116,6 +135,12 @@ h2,
 .h2 {
     font-size: $type-headline-med;
     line-height: $line-global*2;
+}
+
+h3,
+.h3 {
+    font-size: $type-body-med;
+    line-height: $line-global;
 }
 
 h4,
@@ -146,6 +171,29 @@ p {
     color: $black;
 }
 
+button[type="submit"], 
+.button {
+    @include reset-input;
+    display: inline-block;
+    width: 100%;
+    padding: $line-global;
+    text-align: center;
+    font-size: $type-body-med;
+    line-height: $line-global;
+    background: $gold;
+    color: $white;
+
+    &:disabled {
+        opacity: 0.75;
+        cursor: not-allowed;
+        text-decoration: line-through;
+    }
+
+    &:not(:disabled):hover {
+        background: darken($gold, 10%);
+    }
+}
+
 // Utility Classess
 
 .visually-hidden {
@@ -171,7 +219,7 @@ p {
         min-height: 0;
     }
 
-    &.collaps {
+    &.collapse {
         grid-column-gap: 0;
         grid-row-gap: 0;
     }
@@ -207,7 +255,6 @@ p {
 }
 
 // Header 
-
 .header-global {
     position: fixed;
     top: 0;
@@ -237,8 +284,6 @@ p {
         margin-bottom: $line-global;
     }
 }
-
-
 
 .footer-top, 
 .footer-bottom {
@@ -280,7 +325,7 @@ p {
     text-align: center;
 
     .product-title {
-        padding: $line-global;
+        padding: $line-global 0;
         margin-top: auto;
         margin-bottom: auto;
     }
@@ -298,13 +343,12 @@ p {
         margin: 0 auto; 
     }
 
-    p {
+    .product-description {
         margin-bottom: $line-global;
     }
 }
 
 // Product Card 
-
 .product-card {
 
     .card-image {
@@ -329,8 +373,7 @@ p {
     }
 }
 
-// Product Card 
-
+// Product page
 .product-image {
     width: 100%;
 
@@ -341,7 +384,8 @@ p {
     }
 }
 
-// Add to Cart Form 
+
+// Add to cart form 
 #add-to-cart-form {
 
 }
@@ -369,7 +413,7 @@ p {
         @include spaced-caps;
         display: inline-block;
         cursor: pointer;
-        padding: $line-global;
+        padding: $line-global/5;
         border: 1px solid transparent;
         color: $text-color-light-white;
     }
@@ -385,3 +429,94 @@ p {
         color: $text-color;
     }
 }
+
+.quantity-button {
+    @include reset-input;
+    font-size: $line-global;
+    line-height: $line-global;
+    text-align: center;
+    font-weight: $type-bold;
+    color: $text-color-white;
+    width: $line-global;
+
+    &:disabled {
+        opacity: 0.5;
+    }
+
+    &:not(:disabled):hover {
+        color: $white;
+    }
+}
+
+.quantity-text {
+    display: inline-block;
+    text-align: center;
+    min-width: $line-global;
+    margin: 0 $line-global/2;
+}
+
+#add-to-cart-button {
+    margin-top: $line-global;
+}
+
+// Cart Page Styles
+.cart-page-contents {
+    background: $light-black;
+    padding: $offset-global;
+    max-width: 380px;
+    margin: auto;
+}
+
+// Shared Cart Styles
+.cart-lines {
+    margin-top: $line-global;
+    border-top: $standard-border-white;
+    border-bottom: $standard-border-white;
+    padding: $line-global 0;
+}
+
+.cart-empty-text {
+    margin: ($line-global*4)0;
+}
+
+//Line Item Styles 
+.line-item {
+    @extend .text-white;
+
+    @include flex-space-between;
+
+    .line-image {
+        width: 80px;
+        position: relative;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+    .remove-line {
+        position: absolute;
+        width: $line-global;
+        height: $line-global;
+        top: -($line-global/2);
+        right: -($line-global/2);
+        display: none;
+    }
+
+    &:hover{
+        .remove-line {
+            display: block;
+        }
+    }
+
+    &:not(:first-child) {
+        margin-top: $line-global;
+    }
+}
+
+.subtotal-line {
+    @include flex-space-between;
+    padding: $line-global 0;
+}
+
