@@ -21,7 +21,7 @@
   },
   "cart": {
     "button": {
-      "count": "Cart ({{ itemCount }})",
+      "count_html": "Cart (<span class=\"js-cart-item-count\">{{ itemCount }}</span>)",
       "close": "Close"
     },
     "empty": {

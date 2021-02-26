@@ -91,6 +91,7 @@ $(document).ready(function () {
                         $miniCartContents = $('.js-mini-cart-contents'),
                         $cartItemCount = $('.js-cart-item-count');
 
+
                     $cartItemCount.text(dataCartItemCount);
                     $miniCartContents.html(dataCartHtml);
                 }
