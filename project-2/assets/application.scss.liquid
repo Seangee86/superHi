@@ -232,7 +232,17 @@ button[type="submit"],
 .valign-center {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    //justify-content: center;
+
+    > * {
+        &:first-child {
+            margin-top: auto;
+        }
+
+        &:last-child {
+            margin-bottom: auto;
+        }
+    }
 }
 
 .ta-center {
@@ -520,3 +530,19 @@ button[type="submit"],
     padding: $line-global 0;
 }
 
+// Mini Cart Styles
+#mini-cart {
+    position: fixed;
+    top: $header-height;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    max-width: 380px;
+    background: $light-black;
+
+    .mini-cart-contents {
+        overflow: auto;
+        padding: $offset-global;
+        height: 100%;
+    }
+}
